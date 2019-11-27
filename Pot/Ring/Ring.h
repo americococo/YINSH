@@ -1,13 +1,11 @@
 #pragma once
 
 enum eDirection;
-struct sPosition;
 
-class Ring
+#include "../Pot.h"
+class Ring:public Pot
 {
-private:
-    bool _color;
-    sPosition _sPostion;
+
 public:
     Ring(bool color,sPosition postition); 
     ~Ring();

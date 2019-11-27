@@ -1,17 +1,13 @@
 #pragma once
 
-enum eDirection;
-struct sPosition;
+#include "../Pot.h"
 
-class Marker
+class Marker :public Pot
 {
-private:
-	bool _color;
-	sPosition _sPostion;
+
 public:
 	Marker(bool color, sPosition postition);
 	~Marker();
-
 
 	void reverse();
 

@@ -4,8 +4,9 @@
 struct sPosition;
 class YINSH_TIT;
 
-class Ring;
 
+enum ePotType;
+class Pot;
 class MapManager
 {
 private:
@@ -20,16 +21,8 @@ public:
         static MapManager * instance = new  MapManager();
         return * instance;
     }
-    YINSH_TIT * getTit(sPosition postion) 
-	{
-		return _mapData[postion._x][postion._y];
-	}
+	YINSH_TIT * getTit(sPosition postion);
 
-	//void SettingComp(Comp * comp, sPosition postion);
-	
-
-	void SettingRing(Ring * ring, sPosition postion);
-	void SettingMarker(Marker * marker, sPosition postion);
-
+	void SettingPot(Pot * pot,ePotType type, sPosition postion);
 	void MoveRing(sPosition form,sPosition to);
 };

@@ -2,8 +2,9 @@
 #include "../TIT/Yinsh_TIT.h"
 #include "../sPosition.h"
 
-#include "../Pot/Ring/Ring.h"
-#include "../Pot/Marker/Marker.h"
+#include "../Pot/Pot.h"
+
+#include "../sPosition.h"
 MapManager::MapManager()
 {
         int x;
@@ -14,7 +15,7 @@ MapManager::MapManager()
             postionL._x =x;
             postionL._y = 5;
             YINSH_TIT * tit= new YINSH_TIT(postionL);
-            _mapData[x][y] = tit;
+            _mapData[x][5] = tit;
         }
 
         for(y=4; y > 0; y--)
@@ -56,7 +57,7 @@ MapManager::MapManager()
             postionL._x =x;
             postionL._y = -5;
             YINSH_TIT * tit= new YINSH_TIT(postionL);
-            _mapData[x][y] = tit;
+            _mapData[x][-5] = tit;
         }
 
 }
@@ -64,18 +65,18 @@ MapManager::~MapManager()
 {
 
 }
-void MapManager::SettingRing(Ring * ring, sPosition postion)
+YINSH_TIT * MapManager::getTit(sPosition postion)
 {
-	_mapData[postion._x][postion._y]->SettingRing(ring);
+	return _mapData[postion._x][postion._y];
 }
-void MapManager::SettingMarker(Marker * marker, sPosition postion)
+void MapManager::SettingPot(Pot * pot, ePotType type,sPosition postion)
 {
-	_mapData[postion._x][postion._y]->SettingMarker(marker);
+	_mapData[postion._x][postion._y]->SettingPot(pot,type);
 }
 
 void MapManager::MoveRing(sPosition form, sPosition to)
 {
 	_mapData[to._x][to._y] = _mapData[form._x][form._y];
 
-	_mapData[form._x][form._y] = nullptr;
+	_mapData[form._x][form._y]->SettingPot(nullptr,ePotType::eRING);
 }

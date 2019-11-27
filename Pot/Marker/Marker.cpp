@@ -5,10 +5,9 @@
 
 Marker::Marker(bool color, sPosition postition)
 {
-	_color = color;
-	_sPostion = postition;
+	Pot(color, postition);
 
-	MapManager::GetInstance().SettingMarker(this, _sPostion);
+	MapManager::GetInstance().SettingPot(this, ePotType::eMarker,_sPostion);
 }
 
 Marker::~Marker()
