@@ -1,6 +1,7 @@
 #pragma once
 
 struct sPosition;
+class Player;
 #include "../sPosition.h"
 enum ePotType
 {
@@ -15,11 +16,14 @@ protected:
 
 	bool _color;
 	sPosition _sPostion;
+	Player * _owner;
 
 public:
-	Pot(bool color, sPosition postition);
+	Pot(bool color, Player * player,sPosition postition);
 	Pot();
 	~Pot();
 
+	Player * getOwner() { return _owner; }
+	sPosition GetPostion() { return _sPostion; }
 };
 

@@ -3,8 +3,12 @@
 #include "../sPosition.h"
 
 #include "../Pot/Pot.h"
-
+#include "../Pot/Ring/Ring.h"
 #include "../sPosition.h"
+
+#include "../Player/Player.h"
+
+#include <vector>
 MapManager::MapManager()
 {
         int x;
@@ -76,7 +80,29 @@ void MapManager::SettingPot(Pot * pot, ePotType type,sPosition postion)
 
 void MapManager::MoveRing(sPosition form, sPosition to)
 {
+
 	_mapData[to._x][to._y] = _mapData[form._x][form._y];
 
 	_mapData[form._x][form._y]->SettingPot(nullptr,ePotType::eRING);
+}
+
+bool MapManager::CanMoving(Player * player)
+{
+	std::vector<Pot*> pots = player->GetPot(ePotType::eRING);
+	std::vector<Pot*>::iterator itr= pots.begin();
+	for (pots.begin();itr!= pots.end(); itr++)
+	{
+		sPosition chPoint;
+		chPoint = (*itr)->GetPostion();
+		for (int i = 0; i < 6; i++)
+		{
+			sPosition chpoint2;
+			chpoint2 = addPosition(chPoint, vector[i]);
+			if (nullptr == _mapData[chpoint2._x][chpoint2._y]->returnPot(ePotType::eRING))
+				return true;
+		}
+		
+	}
+	
+	return false;
 }

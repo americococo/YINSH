@@ -3,9 +3,9 @@
 #include "../../Map/MapManager.h"
 #include "../../TIT/Yinsh_TIT.h"
 
-Marker::Marker(bool color, sPosition postition)
+Marker::Marker(bool color, Player * player, sPosition postition)
 {
-	Pot(color, postition);
+	Pot(color, player,postition);
 
 	MapManager::GetInstance().SettingPot(this, ePotType::eMarker,_sPostion);
 }

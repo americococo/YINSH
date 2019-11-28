@@ -5,9 +5,9 @@
 
 #include "../../sPosition.h"
 
-Ring::Ring(bool color,sPosition postition)
+Ring::Ring(bool color, Player * player, sPosition postition)
 {
-	Pot(color, postition);
+	Pot(color, player,postition);
 	
 	MapManager::GetInstance().SettingPot(this,ePotType::eRING, _sPostion);
 }

@@ -7,7 +7,7 @@ class Ring:public Pot
 {
 
 public:
-    Ring(bool color,sPosition postition); 
+	Ring(bool color, Player * player, sPosition postition);
     ~Ring();
 
     void move(eDirection direction , int walkPoint);
