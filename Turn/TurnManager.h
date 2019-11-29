@@ -1,8 +1,12 @@
 #pragma once
 
-#include "../DLinkedList.h"
-class Player;
+#include <list>
+#include <vector>
 
+class Pot;
+class Marker;
+class Player;
+struct sPosition;
 class TurnManager
 {
 private:
@@ -16,10 +20,16 @@ public:
 	}
 	void Update();
 
-	DLinkedList<Player*> _playerList;
-	DLinkedListIterator<Player*> _playeritr;
+	std::list<Player*> _playerList;
+	std::list<Player*>::iterator _playerListitr;
 	~TurnManager();
 
+	void CheckDelete();
 
+	bool CHEAKY(int direction,Marker * marker);
+
+
+private:
+	std::vector<Marker*> _deleteMarker;
 };
 
