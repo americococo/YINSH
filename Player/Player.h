@@ -15,4 +15,9 @@ private:
 
 public:
 	std::vector<Pot *> GetPot(ePotType type);
+
+	int RingCount();
+
+	void settingRing();
+
 };

@@ -1,5 +1,6 @@
 #include "Yinsh_TIT.h"
 #include "../Pot/Pot.h"
+#include "../Pot/Marker/Marker.h"
 
 YINSH_TIT::YINSH_TIT()
 {
@@ -77,4 +78,9 @@ void YINSH_TIT::SettingPot(Pot * pot, ePotType type)
 	case eRING:
 		_marker = pot; break;
 	}
+}
+
+void YINSH_TIT::ResetMarker()
+{
+	_marker = nullptr;
 }

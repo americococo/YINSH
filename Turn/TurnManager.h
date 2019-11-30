@@ -20,8 +20,7 @@ public:
 	}
 	void Update();
 
-	std::list<Player*> _playerList;
-	std::list<Player*>::iterator _playerListitr;
+
 	~TurnManager();
 
 	void CheckDelete();
@@ -30,6 +29,12 @@ public:
 
 
 private:
+	std::vector<Player*> _playerch;	
 	std::vector<Marker*> _deleteMarker;
+	std::list<Player*> _playerList;
+	std::list<Player*>::iterator _playerListitr;
+
+public:
+	std::vector<Player *> GetPlayer();
 };
 

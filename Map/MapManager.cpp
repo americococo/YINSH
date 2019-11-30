@@ -106,3 +106,8 @@ bool MapManager::CanMoving(Player * player)
 	
 	return false;
 }
+void MapManager::ResetMarker(Pot * pot)
+{
+	sPosition ssss = pot->GetPostion();
+	_mapData[ssss._x][ssss._y]->ResetMarker();
+}

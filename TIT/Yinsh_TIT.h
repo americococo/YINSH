@@ -5,7 +5,6 @@
 #include "../Map/MapManager.h"
 
 enum ePotType;
-
 class Pot;
 class YINSH_TIT
 {
@@ -35,5 +34,5 @@ public:
 	//void SettingMarker(Marker * ring);
 	void SettingPot(Pot * pot,ePotType type);
 
-
+	void ResetMarker();
 };

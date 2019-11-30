@@ -17,7 +17,9 @@ TurnManager::TurnManager()
 	_playerList.push_back(p2);
 	
 	_playerListitr = _playerList.begin();
-
+	
+	_playerch.push_back(p1);
+	_playerch.push_back(p2);
 	cirleNum = 0;
 }
 
@@ -34,11 +36,11 @@ void TurnManager::Update()
 	
 	Player * p = (*_playerListitr);
 	
-	//if(ring 설치여부 확인)
-	//{	
-	//p1->settingRing();
-	//return;
-	//}
+	if(p->RingCount() != 5)
+	{	
+		p->settingRing();
+		return;
+	}
 
 
 	//if(ring 이동가능 확인)	MapManager::GetInstance().CanMoving(p);
@@ -63,15 +65,16 @@ void TurnManager::Update()
 
 void TurnManager::CheckDelete()
 {
-	if (_deleteMarker.size == 0)
+	if (_deleteMarker.size() == 0)
 		return;
-	//while(_deleteMarker.empty())
-	//{
-	//	Marker * deleteMarker = _deleteMarker.push_back();
-	//	MapManager::GetInstance().GetResetMarker(deleteMarker);
-	//	(*_playerListitr).GetResetMarker(deleteMarker);
-	//}
-	//CheckDelete();
+
+	while(_deleteMarker.empty())
+	{
+		Marker * deleteMarker = _deleteMarker.back();
+		MapManager::GetInstance().ResetMarker(deleteMarker);
+		(*_playerListitr).ResetMarker(deleteMarker);
+		_deleteMarker.pop_back();
+	}
 	return;
 	
 }
@@ -102,4 +105,10 @@ bool TurnManager::CHEAKY(int direction,Marker * marker)
 	CheckDelete();
 
 	return true;
+}
+
+std::vector<Player *> TurnManager::GetPlayer()
+{
+	return _playerch;
+
 }
