@@ -19,5 +19,6 @@ public:
 	int RingCount();
 
 	void settingRing();
+	void SettingMarker();
 
 };

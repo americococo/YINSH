@@ -36,6 +36,8 @@ void TurnManager::Update()
 	
 	Player * p = (*_playerListitr);
 	
+
+	//링 설치 안되있음(초기)
 	if(p->RingCount() != 5)
 	{	
 		p->settingRing();
@@ -43,22 +45,25 @@ void TurnManager::Update()
 	}
 
 
-	//if(ring 이동가능 확인)	MapManager::GetInstance().CanMoving(p);
-	//p1->marker setting 및 ring 이동
-	//_playeritr.Forth();
-	//Player * _2p = _playeritr.item();
-	//_playeritr.Back();
-	//Ring , Chip 제거할것 체크
-	//CHEAKY(int direction, Marker * marker);
+	if (MapManager::GetInstance().CanMoving(p))
+	{
+		p->SettingMarker();
+
+		_playerListitr++;
+		Player * _2p = (*_playerListitr);
+		_playerListitr--;
+	}
 	
-	//for(int i = 0; i < = p1->GetPot(ePotType::eMarker).size();i++)
-	//{
-	//	for(int y = 0; y < 6; y++)
-	//	{
-	//		CHEAKY(y, p1->GetPot(ePotType::eMarker)[i]);
-	//	}
-	//}
-	//점수 추가
+	
+	for(int i = 0; i <= p->GetPot(ePotType::eMarker).size(); i++)
+	{
+		for(int y = 0; y < 6; y++)
+		{
+			CHEAKY(y,((Marker*)p->GetPot(ePotType::eMarker)[i]));
+		}
+	}
+
+
 	_playerListitr++;
 
 }

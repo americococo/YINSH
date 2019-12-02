@@ -39,3 +39,10 @@ void Player::settingRing()
 	//Ring * ring = new Ring(true, this, settingPosition); // 1.색깔 1p -> 1 2p-> 0, 2. owner  3.settingposition
 	//_rings.push_back(ring);
 }
+void Player::SettingMarker()
+{
+	//칩 세팅후
+	//링 이동 까지
+
+	
+}
