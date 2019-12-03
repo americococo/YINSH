@@ -29,10 +29,9 @@ public:
 
     YINSH_TIT * getNearTit(int direction);
 
-
-	//void SettingRing(Ring * ring);
-	//void SettingMarker(Marker * ring);
 	void SettingPot(Pot * pot,ePotType type);
 
 	void ResetMarker();
+
+	void Render();
 };

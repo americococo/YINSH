@@ -18,7 +18,7 @@ public:
 		static TurnManager * instance = new TurnManager();
 		return * instance;
 	}
-	void Update();
+	bool Update();
 
 
 	~TurnManager();

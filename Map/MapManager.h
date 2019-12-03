@@ -22,6 +22,8 @@ public:
         static MapManager * instance = new  MapManager();
         return * instance;
     }
+
+	void Render();
 	YINSH_TIT * getTit(sPosition postion);
 
 	void SettingPot(Pot * pot,ePotType type, sPosition postion);
@@ -32,4 +34,6 @@ public:
 	bool CanMoving(Player * player);//내가 가진 링중 하나라도 한칸이상 움직일수 있는지 확인
 
 	void ResetMarker(Pot * pot);
+
+
 };

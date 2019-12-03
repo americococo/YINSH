@@ -46,3 +46,23 @@ void Player::SettingMarker()
 
 	
 }
+bool Player::GetScore()
+{
+	return _score == 3 ? true :  false;
+}
+
+void Player::ResetMarker(Pot * marker)
+{
+	for (int i = 0; i < _markers.size(); i++)
+	{
+		if (_markers[i] == marker)
+		{
+			_markers[i] == nullptr;
+		}
+
+	}
+}
+void Player::GainScore()
+{
+	_score++;
+}

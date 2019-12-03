@@ -84,3 +84,11 @@ void YINSH_TIT::ResetMarker()
 {
 	_marker = nullptr;
 }
+void YINSH_TIT::Render()
+{
+	//_pic->render();
+	//if(_marker != nullptr)
+	//	_marker->render();
+	//if(_ring != nullptr)
+	//	_ring->render();
+}

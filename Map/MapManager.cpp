@@ -69,6 +69,17 @@ MapManager::~MapManager()
 {
 
 }
+void MapManager::Render()
+{
+	for (int i = -5; i <= 5; i++)
+	{
+		for (int y = -5; y <= 5; y++)
+		{
+			_mapData[i][y]->Render();
+		}
+	}
+
+}
 YINSH_TIT * MapManager::getTit(sPosition postion)
 {
 	return _mapData[postion._x][postion._y];

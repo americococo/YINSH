@@ -2,6 +2,7 @@
 #include <vector>
 class Pot;
 enum ePotType;
+
 class Player
 {
 public:
@@ -21,4 +22,8 @@ public:
 	void settingRing();
 	void SettingMarker();
 
+	bool GetScore();
+
+	void ResetMarker(Pot * marker);
+	void GainScore();
 };

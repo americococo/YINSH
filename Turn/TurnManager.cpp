@@ -27,17 +27,18 @@ TurnManager::~TurnManager()
 {
 }
 
-void TurnManager::Update()
+bool TurnManager::Update()
 {
-	if (_playerListitr != _playerList.end())
+	bool endChk=false;
+
+	if (_playerListitr == _playerList.end())
 		_playerListitr = _playerList.begin();
 
-	_playerListitr++;
 	
 	Player * p = (*_playerListitr);
 	
 
-	//링 설치 안되있음(초기)
+	//링 5개 설치 안되있음(초기)
 	if(p->RingCount() != 5)
 	{	
 		p->settingRing();
@@ -59,12 +60,28 @@ void TurnManager::Update()
 	{
 		for(int y = 0; y < 6; y++)
 		{
-			CHEAKY(y,((Marker*)p->GetPot(ePotType::eMarker)[i]));
+			if (CHEAKY(y, ((Marker*)p->GetPot(ePotType::eMarker)[i])) == true)
+			{
+				CheckDelete();
+			}
 		}
 	}
-
+	
+	{
+		_playerListitr++;
+		Player * p2 = (*_playerListitr);
+		if (p->GetScore() || p2->GetScore())
+		{
+			endChk = true;
+		}
+		_playerListitr--;
+	}
 
 	_playerListitr++;
+
+
+
+	return endChk;
 
 }
 
@@ -77,11 +94,12 @@ void TurnManager::CheckDelete()
 	{
 		Marker * deleteMarker = _deleteMarker.back();
 		MapManager::GetInstance().ResetMarker(deleteMarker);
-		(*_playerListitr).ResetMarker(deleteMarker);
+		(*_playerListitr)->ResetMarker(deleteMarker);
 		_deleteMarker.pop_back();
 	}
+
 	return;
-	
+
 }
 
 bool TurnManager::CHEAKY(int direction,Marker * marker)
@@ -104,10 +122,9 @@ bool TurnManager::CHEAKY(int direction,Marker * marker)
 
 	} while (i<5);
 
+	marker->getOwner()->GainScore();
 
 	_deleteMarker.push_back(marker);
-
-	CheckDelete();
 
 	return true;
 }
