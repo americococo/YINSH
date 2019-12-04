@@ -1,5 +1,4 @@
 #include "System.h"
-#include <SDL.h>
 #include "../Map/MapManager.h"
 void System::setRenderer(SDL_Renderer * renderer)
 {
@@ -8,4 +7,9 @@ void System::setRenderer(SDL_Renderer * renderer)
 void System::Render()
 {
 	MapManager::GetInstance().Render();
+
+	//마우스 갖다대면 설치
+}
+System::System()
+{
 }

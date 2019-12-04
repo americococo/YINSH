@@ -1,7 +1,7 @@
 #include "Yinsh_TIT.h"
 #include "../Pot/Pot.h"
 #include "../Pot/Marker/Marker.h"
-
+#include "../Map/MapManager.h"
 YINSH_TIT::YINSH_TIT()
 {
 	_marker = nullptr;

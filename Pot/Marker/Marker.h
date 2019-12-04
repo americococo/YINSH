@@ -6,7 +6,7 @@ class Marker :public Pot
 {
 
 public:
-	Marker(bool color, Player * player, sPosition postition);
+	Marker(bool color, Player * player, sPosition  postition);
 	~Marker();
 
 	void reverse();

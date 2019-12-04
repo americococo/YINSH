@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <map>
 
 struct sPosition;
 class YINSH_TIT;
@@ -11,8 +11,8 @@ class Player;
 class MapManager
 {
 private:
-    std::vector<std::vector<YINSH_TIT*>> _mapData;
-
+	std::map<int, std::map<int, YINSH_TIT*>> _mapData;
+	
     MapManager();
 public:
 

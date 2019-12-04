@@ -1,6 +1,10 @@
 #include "Turn/TurnManager.h"
 #include "System/System.h"
 #include <SDL.h>
+#include <thread>
+#include <future>
+
+
 
 int main(int argc, char * argv[])
 {
@@ -8,8 +12,8 @@ int main(int argc, char * argv[])
 	SDL_Init(SDL_INIT_EVERYTHING);
 
 	SDL_Window * SDL_win =
-		SDL_CreateWindow("YINSH",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			800,600,SDL_WINDOW_OPENGL);
+		SDL_CreateWindow("YINSH", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+			800, 600, SDL_WINDOW_OPENGL);
 
 	System::GetInstance().setRenderer(SDL_CreateRenderer(SDL_win, -1, 0));
 	SDL_SetRenderDrawColor(System::GetInstance().GetRenderer(), 255, 255, 255, 255);
@@ -58,17 +62,20 @@ int main(int argc, char * argv[])
 					//InputManager::GetInstance()->KeyDown(Event.key.keysym.sym);
 				}
 			}
-
-		isend = TurnManager::GetInstance().Update();
-
-		SDL_RenderClear(System::GetInstance().GetRenderer());
+			SDL_RenderClear(System::GetInstance().GetRenderer());
 			System::GetInstance().Render();
-		SDL_RenderPresent(System::GetInstance().GetRenderer());
+			SDL_RenderPresent(System::GetInstance().GetRenderer());
 
-		if (isend)
-			break;
+
+			isend = TurnManager::GetInstance().Update();
+
+			SDL_RenderClear(System::GetInstance().GetRenderer());
+			System::GetInstance().Render();
+			SDL_RenderPresent(System::GetInstance().GetRenderer());
+
+			if (isend)
+				break;
+		}
 	}
-	
-
-	return 0;
+		return 0;
 }

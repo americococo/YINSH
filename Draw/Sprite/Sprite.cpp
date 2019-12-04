@@ -1,19 +1,19 @@
 ﻿#include "Sprite.h"
 #include "../../System/System.h"
 
-
-#include <SDL_image.h>
 #include <stdio.h>
-
 #include <string>
 
-Sprite::Sprite() {}
+Sprite::Sprite()
+{
+
+}
 Sprite::Sprite(const char * fileName)
 {
 	_sprite = nullptr;
 
 	char filePaht[256];
-
+	
 	sprintf(filePaht, "../Resource/image/%s", fileName);
 
 	_sprite = IMG_LoadTexture(System::GetInstance().GetRenderer(), filePaht);

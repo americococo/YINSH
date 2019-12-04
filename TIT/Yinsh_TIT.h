@@ -2,7 +2,7 @@
 
 #include <map>
 #include "../sPosition.h"
-#include "../Map/MapManager.h"
+
 
 enum ePotType;
 class Pot;

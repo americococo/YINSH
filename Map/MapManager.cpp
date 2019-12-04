@@ -4,13 +4,13 @@
 
 #include "../Pot/Pot.h"
 #include "../Pot/Ring/Ring.h"
-#include "../sPosition.h"
 
 #include "../Player/Player.h"
 
 #include <vector>
 MapManager::MapManager()
 {
+		
         int x;
         int y;
         for(x=1;x<5;x++)
@@ -19,37 +19,40 @@ MapManager::MapManager()
             postionL._x =x;
             postionL._y = 5;
             YINSH_TIT * tit= new YINSH_TIT(postionL);
-            _mapData[x][5] = tit;
+            _mapData[5][x] = tit;
         }
 
-        for(y=4; y > 0; y--)
-        {
-            for (x = -1 - (y-4); x <= 5; x++)
-            {
-               sPosition postionL;
-               postionL._x =x;
-               postionL._y = y;
-               YINSH_TIT * tit= new YINSH_TIT(postionL);
-              _mapData[x][y] = tit;
-            }            
-        }
+		for (int y = 4; y >= 1; y--)
+		{
+			int zonazzaging = -1 * (y - 4);
+			for (int x = -1 - zonazzaging; x <= 5; x++)
+			{
+				sPosition postionL;
+				postionL._x = x;
+				postionL._y = 4;
+				YINSH_TIT * tit = new YINSH_TIT(postionL);
+				_mapData[y][x] = tit;
+			}
+		}
+
         for (x = -4 ; x <= 4; x++)
         {
             sPosition postionL;
             postionL._x =x;
             postionL._y = 0;
             YINSH_TIT * tit= new YINSH_TIT(postionL);
-            _mapData[x][y] = tit;
+            _mapData[0][x] = tit;
         }
-        for(y=4; y > 0; y--)
+
+        for(y=-1; y >= -4; y--)
         {
-            for (x = -5; x <= 4 - (y-4); x++)
+			for (x = -5; x <= 4 + (y+1); x++)
             {
                sPosition postionL;
                postionL._x =x;
                postionL._y = y;
                YINSH_TIT * tit= new YINSH_TIT(postionL);
-              _mapData[x][y] = tit;
+              _mapData[y][x] = tit;
             }
             
             
@@ -61,7 +64,7 @@ MapManager::MapManager()
             postionL._x =x;
             postionL._y = -5;
             YINSH_TIT * tit= new YINSH_TIT(postionL);
-            _mapData[x][-5] = tit;
+            _mapData[-5][x] = tit;
         }
 
 }
@@ -71,20 +74,25 @@ MapManager::~MapManager()
 }
 void MapManager::Render()
 {
-	for (int i = -5; i <= 5; i++)
+	std::map<int, std::map<int, YINSH_TIT*>>::iterator mapAllPleace;
+	for (mapAllPleace = _mapData.begin(); mapAllPleace != _mapData.end(); mapAllPleace++)
 	{
-		for (int y = -5; y <= 5; y++)
+		std::map<int, YINSH_TIT*>::iterator mapPleace;
+		
+		for (mapPleace = (*mapAllPleace).second.begin(); mapPleace != (*mapAllPleace).second.end(); mapPleace++)
 		{
-			_mapData[i][y]->Render();
+			(*mapPleace).second->Render();
 		}
 	}
+	
+
 
 }
 YINSH_TIT * MapManager::getTit(sPosition postion)
 {
 	return _mapData[postion._x][postion._y];
 }
-void MapManager::SettingPot(Pot * pot, ePotType type,sPosition postion)
+void MapManager::SettingPot(Pot * pot, ePotType type,sPosition  postion)
 {
 	_mapData[postion._x][postion._y]->SettingPot(pot,type);
 }
@@ -119,6 +127,6 @@ bool MapManager::CanMoving(Player * player)
 }
 void MapManager::ResetMarker(Pot * pot)
 {
-	sPosition ssss = pot->GetPostion();
+	sPosition  ssss = pot->GetPostion();
 	_mapData[ssss._x][ssss._y]->ResetMarker();
 }

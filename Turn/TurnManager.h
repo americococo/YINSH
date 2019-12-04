@@ -2,11 +2,12 @@
 
 #include <list>
 #include <vector>
-
+#include "../sPosition.h"
 class Pot;
 class Marker;
 class Player;
-struct sPosition;
+
+
 class TurnManager
 {
 private:

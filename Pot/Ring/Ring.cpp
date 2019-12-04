@@ -3,7 +3,6 @@
 #include "../../TIT/Yinsh_TIT.h"
 #include "../Marker/Marker.h"
 
-#include "../../sPosition.h"
 
 Ring::Ring(bool color, Player * player, sPosition postition)
 {

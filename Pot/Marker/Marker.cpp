@@ -1,10 +1,10 @@
 #include "Marker.h"
-#include "../../sPosition.h"
+
 #include "../../Map/MapManager.h"
 #include "../../Turn/TurnManager.h"
 #include "../../TIT/Yinsh_TIT.h"
 
-Marker::Marker(bool color, Player * player, sPosition postition)
+Marker::Marker(bool color, Player * player, sPosition  postition)
 {
 	Pot(color, player,postition);
 

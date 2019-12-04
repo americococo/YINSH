@@ -1,11 +1,12 @@
 #include "TurnManager.h"
 #include "../Player/Player.h"
-#include "../Map/MapManager.h"
 
 #include "../TIT/Yinsh_TIT.h"
 #include "../Pot/Ring/Ring.h"
 #include "../Pot/Marker/Marker.h"
-#include "../sPosition.h"
+
+
+#include "../Map/MapManager.h"
 
 TurnManager::TurnManager()
 {
@@ -42,7 +43,7 @@ bool TurnManager::Update()
 	if(p->RingCount() != 5)
 	{	
 		p->settingRing();
-		return;
+		return false;
 	}
 
 
@@ -82,7 +83,6 @@ bool TurnManager::Update()
 
 
 	return endChk;
-
 }
 
 void TurnManager::CheckDelete()

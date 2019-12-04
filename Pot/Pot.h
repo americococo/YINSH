@@ -15,15 +15,15 @@ class Pot
 protected:
 
 	bool _color;
-	sPosition _sPostion;
+	sPosition  _sPostion;
 	Player * _owner;
 
 public:
-	Pot(bool color, Player * player,sPosition postition);
+	Pot(bool color, Player * player,sPosition  postition);
 	Pot();
 	~Pot();
 
-	Player * getOwner() { return _owner; }
-	sPosition GetPostion() { return _sPostion; }
+	Player * getOwner();
+	sPosition  GetPostion();
 };
 

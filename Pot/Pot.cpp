@@ -2,7 +2,8 @@
 
 #include "../Map/MapManager.h"
 
-Pot::Pot(bool color,Player * player ,sPosition postition)
+#include "../Player/Player.h"
+Pot::Pot(bool color,Player * player ,sPosition  postition)
 {
 	_color = color;
 	_sPostion = postition;
@@ -16,4 +17,12 @@ Pot::Pot()
 Pot::~Pot()
 {
 
+}
+Player * Pot::getOwner()
+{
+	return _owner; 
+}
+sPosition Pot::GetPostion()
+{
+	return _sPostion;
 }

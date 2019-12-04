@@ -1,5 +1,6 @@
 #pragma once
-struct SDL_Renderer;
+#include <SDL.h>
+
 class System
 {
 private:
@@ -19,6 +20,4 @@ public:
 	void Render();
 };
 
-System::System()
-{
-}
+
