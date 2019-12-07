@@ -1,6 +1,10 @@
 #include "Player.h"
 #include "../Pot/Pot.h"
 #include "../Pot/Ring/Ring.h"
+
+#include <SDL.h>
+
+#include "../System/InputSystem.h"
 Player::Player()
 {
 	_score = 0;
@@ -30,7 +34,11 @@ int Player::RingCount()
 {
 	return _rings.size();
 }
-void Player::settingRing()
+int Player::MarkerCount()
+{
+	return _markers.size();
+}
+bool Player::settingRing()
 {
 	//링 세팅
 	
@@ -38,13 +46,29 @@ void Player::settingRing()
 	//좌표값을 토대로 링 생성
 	//Ring * ring = new Ring(true, this, settingPosition); // 1.색깔 1p -> 1 2p-> 0, 2. owner  3.settingposition
 	//_rings.push_back(ring);
+
+		if (InputSystem::GetInstance().IsInputKey(SDLK_SPACE)==true)
+		{
+			int x = InputSystem::GetInstance().GetMousePositionX();
+  			int y = InputSystem::GetInstance().GetMousePositionY();
+
+			//실좌표 xy를 토대로 Map좌표 도출
+			sPosition askdjaksdj;
+			askdjaksdj._x = 0;
+			askdjaksdj._y = 0;
+			Ring * ring = new Ring(true, this, askdjaksdj);
+			_rings.push_back(ring);
+
+			return true;
+		}
+	return false;
 }
-void Player::SettingMarker()
+bool Player::SettingMarker()
 {
 	//칩 세팅후
 	//링 이동 까지
-
 	
+	return false;
 }
 bool Player::GetScore()
 {

@@ -9,7 +9,7 @@ public:
 	Player();
 	~Player();
 
-private:
+protected:
 	std::vector<Pot *> _markers;
 	std::vector<Pot * > _rings;
 	int _score;
@@ -18,9 +18,9 @@ public:
 	std::vector<Pot *> GetPot(ePotType type);
 
 	int RingCount();
-
-	void settingRing();
-	void SettingMarker();
+	int MarkerCount();
+	virtual bool settingRing();
+	virtual bool SettingMarker();
 
 	bool GetScore();
 

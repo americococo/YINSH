@@ -32,8 +32,7 @@ bool TurnManager::Update()
 {
 	bool endChk=false;
 
-	if (_playerListitr == _playerList.end())
-		_playerListitr = _playerList.begin();
+	
 
 	
 	Player * p = (*_playerListitr);
@@ -42,22 +41,29 @@ bool TurnManager::Update()
 	//링 5개 설치 안되있음(초기)
 	if(p->RingCount() != 5)
 	{	
-		p->settingRing();
-		return false;
+		if (true == p->settingRing())
+		{
+			if (_playerListitr == _playerList.end())
+				_playerListitr = _playerList.begin();
+			else
+				_playerListitr++;
+		}
+		return endChk;
 	}
 
 
-	if (MapManager::GetInstance().CanMoving(p))
+	else if(MapManager::GetInstance().CanMoving(p))
 	{
-		p->SettingMarker();
-
-		_playerListitr++;
-		Player * _2p = (*_playerListitr);
-		_playerListitr--;
+		if (true == p->SettingMarker())
+		{
+			if (_playerListitr == _playerList.end())
+				_playerListitr = _playerList.begin();
+			else
+				_playerListitr++;
+		}
 	}
 	
-	
-	for(int i = 0; i <= p->GetPot(ePotType::eMarker).size(); i++)
+	for(int i = 0; i <= p->MarkerCount(); i++)
 	{
 		for(int y = 0; y < 6; y++)
 		{
@@ -69,16 +75,15 @@ bool TurnManager::Update()
 	}
 	
 	{
-		_playerListitr++;
-		Player * p2 = (*_playerListitr);
-		if (p->GetScore() || p2->GetScore())
+		Player * ppp = _playerList.front();
+		Player * p2 = _playerList.back();
+		
+		if (ppp->GetScore() || p2->GetScore())
 		{
 			endChk = true;
 		}
-		_playerListitr--;
 	}
 
-	_playerListitr++;
 
 
 

@@ -1,5 +1,6 @@
 #include "Turn/TurnManager.h"
 #include "System/System.h"
+#include "System/InputSystem.h"
 #include <SDL.h>
 #include <thread>
 #include <future>
@@ -25,7 +26,6 @@ int main(int argc, char * argv[])
 	int oldTick = curtick;
 
 
-
 	while (true)
 	{
 		curtick = SDL_GetTicks();//
@@ -43,6 +43,7 @@ int main(int argc, char * argv[])
 
 			if (SDL_PollEvent(&Event))
 			{
+				//InputSystem::GetInstance().EventPro(&Event);
 				if (SDL_QUIT == Event.type)
 					break;
 
@@ -54,19 +55,23 @@ int main(int argc, char * argv[])
 						quitEvent.type = SDL_QUIT;
 						SDL_PushEvent(&quitEvent);
 					}
-					//InputManager::GetInstance()->KeyUp(Event.key.keysym.sym);
+					InputSystem::GetInstance().KeyUp(Event.key.keysym.sym);
 				}
-
 				if (SDL_KEYDOWN == Event.type)
 				{
-					//InputManager::GetInstance()->KeyDown(Event.key.keysym.sym);
+					InputSystem::GetInstance().KeyDown(Event.key.keysym.sym);
+				}
+
+				if (SDL_MOUSEMOTION == Event.type)
+				{
+					InputSystem::GetInstance().SetMousePosition(Event.button.x, Event.button.y);
 				}
 			}
 			SDL_RenderClear(System::GetInstance().GetRenderer());
 			System::GetInstance().Render();
 			SDL_RenderPresent(System::GetInstance().GetRenderer());
 
-
+			
 			isend = TurnManager::GetInstance().Update();
 
 			SDL_RenderClear(System::GetInstance().GetRenderer());
