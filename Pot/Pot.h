@@ -3,6 +3,8 @@
 struct sPosition;
 class Player;
 #include "../sPosition.h"
+
+class Sprite;
 enum ePotType
 {
 	eMarker=100,
@@ -17,7 +19,10 @@ protected:
 	bool _color;
 	sPosition  _sPostion;
 	Player * _owner;
+	Sprite * _pic;
 
+	int _realPositionX;
+	int _realPositionY;
 public:
 	Pot(bool color, Player * player,sPosition  postition);
 	Pot();
@@ -25,5 +30,7 @@ public:
 
 	Player * getOwner();
 	sPosition  GetPostion();
+
+	void render();
 };
 

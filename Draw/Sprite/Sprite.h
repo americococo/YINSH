@@ -8,12 +8,13 @@ class Sprite
 private:
 	SDL_Rect _srcRect;
 	SDL_Rect _destRect;
-	SDL_Texture * _sprite;
-
+	SDL_Texture * _texture;
+	int _x;
+	int _y;
 public:
 	Sprite();
 	Sprite(const char * fileName);
-	void setscale(float W, float h);
+	void setscale(float w, float h);
 	void setPosition(int x, int y);
 	void Render();
 

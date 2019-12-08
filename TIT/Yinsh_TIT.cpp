@@ -2,15 +2,92 @@
 #include "../Pot/Pot.h"
 #include "../Pot/Marker/Marker.h"
 #include "../Map/MapManager.h"
+
+#include "../Draw/Sprite/Sprite.h"
+
 YINSH_TIT::YINSH_TIT()
 {
-	_marker = nullptr;
-	_ring = nullptr;
+
 }
 YINSH_TIT::YINSH_TIT(sPosition setingPosition)
 {
-    YINSH_TIT();
-    _position = setingPosition;
+	_marker = nullptr;
+	_ring = nullptr;
+	_sPostion = setingPosition;
+
+
+
+	_pic = new Sprite("TITa.png");
+	_pic->setscale(1.1, 1.1);
+
+	int x;
+	int y;
+
+	x = -11;
+	y = -33;
+
+	
+	{
+		if (_sPostion._x == 0 && _sPostion._y == 0)
+		{
+			y = _sPostion._y + 300;
+			x = 400;
+		}
+		if (_sPostion._x == 0 && _sPostion._y > 0)
+		{
+			y = 300 - (_sPostion._y * 32 * 1.1);
+			x = 400;
+		}
+		if (_sPostion._x == 0 && _sPostion._y < 0)
+		{
+			y = 300 + (_sPostion._y*-1 * 32 * 1.1);
+			x = 400;
+		}
+	}
+
+	{
+		if (_sPostion._x > 0)
+		{
+			if (_sPostion._y == 0)
+			{
+				y = _sPostion._y + 300 + _sPostion._x * 32 / 2 * 1.1;
+				x = 400 + _sPostion._x * 32 * 1.1;
+			}
+			if (_sPostion._y > 0)
+			{
+				y = 300 - (_sPostion._y * 32 * 1.1) + _sPostion._x * 32 / 2 * 1.1;
+				x = 400 + _sPostion._x * 32 * 1.1;
+			}
+			if (_sPostion._y < 0)
+			{
+				y = 300 + (_sPostion._y*-1 * 32 * 1.1) + _sPostion._x * 32 / 2 * 1.1;
+				x = 400 + _sPostion._x * 32 * 1.1;
+			}
+		}
+		else if (_sPostion._x < 0)
+		{
+			if (_sPostion._y == 0)
+			{
+				y = _sPostion._y + 300 + _sPostion._x * 32 / 2 * 1.1;
+				x = 400 + _sPostion._x * 32 * 1.1;
+			}
+			if (_sPostion._y > 0)
+			{
+				y = 300 - (_sPostion._y * 32 * 1.1) + _sPostion._x * 32 / 2 * 1.1;
+				x = 400 + _sPostion._x * 32 * 1.1;
+			}
+			if (_sPostion._y < 0)
+			{
+				y = 300 + (_sPostion._y*-1 * 32 * 1.1) + _sPostion._x * 32 / 2 * 1.1;
+				x = 400 + _sPostion._x * 32 * 1.1;
+			}
+		}
+	}
+
+	_realPositionX = x;
+	_realPositionY = y;
+
+	_pic->setPosition(_realPositionX, _realPositionY);
 }
 YINSH_TIT::~YINSH_TIT()
 {
@@ -33,19 +110,14 @@ void YINSH_TIT::setting_Near_TIT()
 	for (int i = 0; i < 6; i++)
 	{
 		sPosition position;
-		position._x = _position._x + vector[i]._x;
-		position._y = _position._y + vector[i]._y;
+		position._x = _sPostion._x + vector[i]._x;
+		position._y = _sPostion._y + vector[i]._y;
 		Near_TIT[((eDirection)i)] = MapManager::GetInstance().getTit(position);
 	}
 	
 	
-
-	//Near_TIT[eDirection::eNorth] = MapManager::GetInstance().getTit(_position._x);
-	//Near_TIT[eDirection::eNorthEast] = MapManager::GetInstance().getTit(_position._x + 1, _position._y + 1);
-	//Near_TIT[eDirection::eSouthEast] = MapManager::GetInstance().getTit(_position._x + 1, _position._y + 0);
-	//Near_TIT[eDirection::eSouth] = MapManager::GetInstance().getTit(_position._x + 0, _position._y + (-1));
-	//Near_TIT[eDirection::eSouthWest] = MapManager::GetInstance().getTit(_position._x + (-1), _position._y + (-1));
-	//Near_TIT[eDirection::eNorthWest] = MapManager::GetInstance().getTit(_position._x + (-1), _position._y + 0);
+	//¿¹¿ÜÃ³¸®
+	//ÇØÁàÇØÁàÀ×~~~
 
 	return;
 }
@@ -86,9 +158,10 @@ void YINSH_TIT::ResetMarker()
 }
 void YINSH_TIT::Render()
 {
-	//_pic->render();
-	//if(_marker != nullptr)
-	//	_marker->render();
-	//if(_ring != nullptr)
-	//	_ring->render();
+	_pic->Render();
+
+	if(_ring != nullptr)
+		_ring->render();
+	if(_marker != nullptr)
+		_marker->render();
 }

@@ -1,5 +1,8 @@
 #include "TurnManager.h"
+
 #include "../Player/Player.h"
+#include "../Player/User/User.h"
+#include "../Player/Com/Com.h"
 
 #include "../TIT/Yinsh_TIT.h"
 #include "../Pot/Ring/Ring.h"
@@ -11,8 +14,8 @@
 TurnManager::TurnManager()
 {
 	_deleteMarker.clear();
-	Player * p1 = new Player();
-	Player * p2 = new Player();
+	Player * p1 = new User();
+	Player * p2 = new Com();
 
 	_playerList.push_back(p1);
 	_playerList.push_back(p2);
@@ -32,9 +35,7 @@ bool TurnManager::Update()
 {
 	bool endChk=false;
 
-	
 
-	
 	Player * p = (*_playerListitr);
 	
 

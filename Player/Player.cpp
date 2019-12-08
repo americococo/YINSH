@@ -2,14 +2,12 @@
 #include "../Pot/Pot.h"
 #include "../Pot/Ring/Ring.h"
 
-#include <SDL.h>
-
-#include "../System/InputSystem.h"
 Player::Player()
 {
 	_score = 0;
 	_rings.clear();
 	_markers.clear();
+	_playerType = ePlayerType::eNonting;
 }
 
 Player::~Player()
@@ -47,20 +45,6 @@ bool Player::settingRing()
 	//Ring * ring = new Ring(true, this, settingPosition); // 1.ªˆ±Ú 1p -> 1 2p-> 0, 2. owner  3.settingposition
 	//_rings.push_back(ring);
 
-		if (InputSystem::GetInstance().IsInputKey(SDLK_SPACE)==true)
-		{
-			int x = InputSystem::GetInstance().GetMousePositionX();
-  			int y = InputSystem::GetInstance().GetMousePositionY();
-
-			//Ω«¡¬«• xy∏¶ ≈‰¥Î∑Œ Map¡¬«• µµ√‚
-			sPosition askdjaksdj;
-			askdjaksdj._x = 0;
-			askdjaksdj._y = 0;
-			Ring * ring = new Ring(true, this, askdjaksdj);
-			_rings.push_back(ring);
-
-			return true;
-		}
 	return false;
 }
 bool Player::SettingMarker()

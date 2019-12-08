@@ -4,11 +4,22 @@
 #include "../Marker/Marker.h"
 
 
+#include "../../Draw/Sprite/Sprite.h"
 Ring::Ring(bool color, Player * player, sPosition postition)
 {
-	Pot(color, player,postition);
+	_color = color;
+	_sPostion = postition;
+	_owner = player;
+	_pic = new Sprite("Ring.png");
+
 	
+
+
 	MapManager::GetInstance().SettingPot(this,ePotType::eRING, _sPostion);
+	_realPositionX = MapManager::GetInstance().getTit(_sPostion)->GetrealPositionX();
+	_realPositionY = MapManager::GetInstance().getTit(_sPostion)->GetrealPositionY();
+	_pic->setPosition(_realPositionX, _realPositionY);
+	//_pic->setscale(1.1, 1.1);
 }
 
 Ring::~Ring() 

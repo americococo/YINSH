@@ -1,15 +1,15 @@
 #pragma once
 #include "../Player.h"
 
-class User : public Player
+class Com :public Player
 {
-
 public:
-	User();
-	~User();
+	Com();
+	~Com();
+
+
 	bool settingRing();
 	bool SettingMarker();
-
 private:
 
 };

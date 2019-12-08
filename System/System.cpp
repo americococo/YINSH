@@ -6,9 +6,9 @@ void System::setRenderer(SDL_Renderer * renderer)
 }
 void System::Render()
 {
+	SDL_Renderer * renderer = System::GetInstance().GetRenderer();
 	MapManager::GetInstance().Render();
 
-	//마우스 갖다대면 설치
 }
 System::System()
 {

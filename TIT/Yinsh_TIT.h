@@ -3,7 +3,7 @@
 #include <map>
 #include "../sPosition.h"
 
-
+class Sprite;
 enum ePotType;
 class Pot;
 class YINSH_TIT
@@ -13,7 +13,7 @@ private:
 	Pot * _ring;
 	Pot * _marker;
 
-    sPosition _position;
+    sPosition _sPostion;
 
     std::map<eDirection,YINSH_TIT *> Near_TIT;
 
@@ -33,5 +33,17 @@ public:
 
 	void ResetMarker();
 
+private:
+	Sprite * _pic;
+	int _realPositionX;
+	int _realPositionY;
+
+public:
 	void Render();
+
+	int GetrealPositionX() { return _realPositionX; }
+	int GetrealPositionY() { return _realPositionY; }
+
+
+	sPosition GetGamePosition() { return _sPostion; }
 };

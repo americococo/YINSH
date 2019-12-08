@@ -6,7 +6,6 @@
 #include <future>
 
 
-
 int main(int argc, char * argv[])
 {
 	bool isend;
@@ -61,12 +60,22 @@ int main(int argc, char * argv[])
 				{
 					InputSystem::GetInstance().KeyDown(Event.key.keysym.sym);
 				}
-
 				if (SDL_MOUSEMOTION == Event.type)
 				{
 					InputSystem::GetInstance().SetMousePosition(Event.button.x, Event.button.y);
 				}
+
+				if (SDL_MOUSEBUTTONDOWN == Event.type)
+				{
+					InputSystem::GetInstance().MouseDown();
+				}
+				if (SDL_MOUSEBUTTONUP == Event.type)
+				{
+					InputSystem::GetInstance().MouseUp();
+				}
+
 			}
+
 			SDL_RenderClear(System::GetInstance().GetRenderer());
 			System::GetInstance().Render();
 			SDL_RenderPresent(System::GetInstance().GetRenderer());
@@ -74,6 +83,7 @@ int main(int argc, char * argv[])
 			
 			isend = TurnManager::GetInstance().Update();
 
+			
 			SDL_RenderClear(System::GetInstance().GetRenderer());
 			System::GetInstance().Render();
 			SDL_RenderPresent(System::GetInstance().GetRenderer());
@@ -82,5 +92,6 @@ int main(int argc, char * argv[])
 				break;
 		}
 	}
-		return 0;
+	SDL_DestroyRenderer(System::GetInstance().GetRenderer());
+	return 0;
 }

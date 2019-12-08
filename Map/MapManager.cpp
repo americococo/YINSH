@@ -29,7 +29,7 @@ MapManager::MapManager()
 			{
 				sPosition postionL;
 				postionL._x = x;
-				postionL._y = 4;
+				postionL._y = y;
 				YINSH_TIT * tit = new YINSH_TIT(postionL);
 				_mapData[y][x] = tit;
 			}
@@ -64,7 +64,7 @@ MapManager::MapManager()
             postionL._x =x;
             postionL._y = -5;
             YINSH_TIT * tit= new YINSH_TIT(postionL);
-            _mapData[-5][x] = tit;
+            _mapData[y][x] = tit;
         }
 
 }
@@ -84,25 +84,22 @@ void MapManager::Render()
 			(*mapPleace).second->Render();
 		}
 	}
-	
-
-
 }
 YINSH_TIT * MapManager::getTit(sPosition postion)
 {
-	return _mapData[postion._x][postion._y];
+	return _mapData[postion._y][postion._x];
 }
 void MapManager::SettingPot(Pot * pot, ePotType type,sPosition  postion)
 {
-	_mapData[postion._x][postion._y]->SettingPot(pot,type);
+	_mapData[postion._y][postion._x]->SettingPot(pot,type);
 }
 
 void MapManager::MoveRing(sPosition form, sPosition to)
 {
 
-	_mapData[to._x][to._y] = _mapData[form._x][form._y];
+	_mapData[to._y][to._x] = _mapData[form._y][form._x];
 
-	_mapData[form._x][form._y]->SettingPot(nullptr,ePotType::eRING);
+	_mapData[form._y][form._x]->SettingPot(nullptr,ePotType::eRING);
 }
 
 bool MapManager::CanMoving(Player * player)
@@ -117,7 +114,7 @@ bool MapManager::CanMoving(Player * player)
 		{
 			sPosition chpoint2;
 			chpoint2 = addPosition(chPoint, vector[i]);
-			if (nullptr == _mapData[chpoint2._x][chpoint2._y]->returnPot(ePotType::eRING))
+			if (nullptr == _mapData[chpoint2._y][chpoint2._x]->returnPot(ePotType::eRING))
 				return true;
 		}
 		
@@ -128,5 +125,37 @@ bool MapManager::CanMoving(Player * player)
 void MapManager::ResetMarker(Pot * pot)
 {
 	sPosition  ssss = pot->GetPostion();
-	_mapData[ssss._x][ssss._y]->ResetMarker();
+	_mapData[ssss._y][ssss._x]->ResetMarker();
+}
+
+sPosition MapManager::GetTITGamePosition(int RealPositionX, int RealPositionY)
+{
+	sPosition a_cocococo;
+
+	std::map<int, std::map<int, YINSH_TIT*>>::iterator mapAllPleace;
+	for (mapAllPleace = _mapData.begin(); mapAllPleace != _mapData.end(); mapAllPleace++)
+	{
+		std::map<int, YINSH_TIT*>::iterator mapPleace;
+
+		for (mapPleace = (*mapAllPleace).second.begin(); mapPleace != (*mapAllPleace).second.end(); mapPleace++)
+		{
+			int realX = (*mapPleace).second->GetrealPositionX();
+			int realY = (*mapPleace).second->GetrealPositionY();
+
+			int minX = realX - 32 * 1.1 /2;
+			int maxX = minX + 32 * 1.1;
+
+			int minY = realY - 32 * 1.1 / 2;
+			int maxY = realY + 32 * 1.1;
+
+			if (minX<RealPositionX && maxX > RealPositionX &&
+				minY < RealPositionY && maxY > RealPositionY)
+			{
+				a_cocococo = (*mapPleace).second->GetGamePosition();
+				return a_cocococo;
+			}
+			
+		}
+	}
+
 }

@@ -3,6 +3,13 @@
 class Pot;
 enum ePotType;
 
+enum ePlayerType
+{
+	eNonting = 1000,
+	eUser,
+	eCom
+};
+
 class Player
 {
 public:
@@ -13,7 +20,7 @@ protected:
 	std::vector<Pot *> _markers;
 	std::vector<Pot * > _rings;
 	int _score;
-
+	ePlayerType _playerType;
 public:
 	std::vector<Pot *> GetPot(ePotType type);
 
