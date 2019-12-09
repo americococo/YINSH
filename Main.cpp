@@ -16,7 +16,7 @@ int main(int argc, char * argv[])
 			800, 600, SDL_WINDOW_OPENGL);
 
 	System::GetInstance().setRenderer(SDL_CreateRenderer(SDL_win, -1, 0));
-	SDL_SetRenderDrawColor(System::GetInstance().GetRenderer(), 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(System::GetInstance().GetRenderer(), 255, 0, 0, 255);
 
 	SDL_Event Event;
 

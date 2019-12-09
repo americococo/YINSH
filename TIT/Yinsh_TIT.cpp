@@ -17,7 +17,7 @@ YINSH_TIT::YINSH_TIT(sPosition setingPosition)
 
 
 
-	_pic = new Sprite("TITa.png");
+	_pic = new Sprite("TITb.png");
 	_pic->setscale(1.1, 1.1);
 
 	int x;
@@ -123,11 +123,17 @@ void YINSH_TIT::setting_Near_TIT()
 }
 Pot * YINSH_TIT::returnPot(ePotType type)
 {
+
+
 	switch (type)
 	{
 	case eMarker:
+		if (_marker == nullptr)
+			return nullptr;
 		 return _marker;
 	case eRING:
+		if (_ring == nullptr)
+			return nullptr;
 		return _ring;
 	}
 	return nullptr;
@@ -146,9 +152,9 @@ void YINSH_TIT::SettingPot(Pot * pot, ePotType type)
 	switch (type)
 	{
 	case eMarker:
-		_ring = pot; break;
-	case eRING:
 		_marker = pot; break;
+	case eRING:
+		_ring = pot; break;
 	}
 }
 

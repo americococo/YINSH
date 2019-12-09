@@ -11,11 +11,23 @@ Marker::Marker(bool color, Player * player, sPosition  postition)
 	_color = color;
 	_sPostion = postition;
 	_owner = player;
-	_pic = new Sprite("markerChipT");
-	_reverColorSprite = new Sprite("markerChipF");
+
+	if (color == true)
+	{
+		_pic = new Sprite("markerChipT.png");
+		_reverColorSprite = new Sprite("markerChipF");
+	}
+	else
+	{
+		_pic = new Sprite("markerChipF.png");
+		_reverColorSprite = new Sprite("markerChipT");
+	}
+
 	_realPositionX = MapManager::GetInstance().getTit(_sPostion)->GetrealPositionX();
 	_realPositionY = MapManager::GetInstance().getTit(_sPostion)->GetrealPositionY();
 	MapManager::GetInstance().SettingPot(this, ePotType::eMarker,_sPostion);
+
+	_pic->setPosition(_realPositionX, _realPositionY);
 }
 
 Marker::~Marker()

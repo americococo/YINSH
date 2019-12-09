@@ -33,4 +33,6 @@ public:
 
 	void ResetMarker(Pot * marker);
 	void GainScore();
+
+	ePlayerType GetPlayerType() { return _playerType; }
 };

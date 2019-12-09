@@ -97,7 +97,7 @@ void MapManager::SettingPot(Pot * pot, ePotType type,sPosition  postion)
 void MapManager::MoveRing(sPosition form, sPosition to)
 {
 
-	_mapData[to._y][to._x] = _mapData[form._y][form._x];
+	_mapData[to._y][to._x]->SettingPot(_mapData[form._y][form._x]->returnPot(ePotType::eRING), ePotType::eRING);
 
 	_mapData[form._y][form._x]->SettingPot(nullptr,ePotType::eRING);
 }

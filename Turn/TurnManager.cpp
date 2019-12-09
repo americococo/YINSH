@@ -44,10 +44,9 @@ bool TurnManager::Update()
 	{	
 		if (true == p->settingRing())
 		{
+			_playerListitr++;
 			if (_playerListitr == _playerList.end())
 				_playerListitr = _playerList.begin();
-			else
-				_playerListitr++;
 		}
 		return endChk;
 	}
@@ -57,20 +56,25 @@ bool TurnManager::Update()
 	{
 		if (true == p->SettingMarker())
 		{
+			_playerListitr++;
 			if (_playerListitr == _playerList.end())
 				_playerListitr = _playerList.begin();
-			else
-				_playerListitr++;
 		}
 	}
 	
-	for(int i = 0; i <= p->MarkerCount(); i++)
+	
+
+
+	if (p->MarkerCount() > 5)
 	{
-		for(int y = 0; y < 6; y++)
+		for (int i = 0; i <= p->MarkerCount(); i++)
 		{
-			if (CHEAKY(y, ((Marker*)p->GetPot(ePotType::eMarker)[i])) == true)
+			for (int y = 0; y < 6; y++)
 			{
-				CheckDelete();
+				if (CHEAKY(y, ((Marker*)p->GetPot(ePotType::eMarker)[i])) == true)
+				{
+					CheckDelete();
+				}
 			}
 		}
 	}
@@ -115,22 +119,36 @@ bool TurnManager::CHEAKY(int direction,Marker * marker)
 	do
 	{
 		YINSH_TIT * tit = MapManager::GetInstance().getTit(marker->GetPostion())->getNearTit(((eDirection)direction));
+		if (tit == nullptr)
+		{
+			_deleteMarker.clear();
+			return false;
+		}
+
+
 		Marker * marko = (Marker*)(tit->returnPot(ePotType::eMarker));
 		if (marko != nullptr)
 			if (marko->getOwner() != marker->getOwner())
+			{
+				_deleteMarker.clear();
 				return false;
+			}
 
 		if (marko == nullptr)
+		{
+			_deleteMarker.clear();
 			return false;
-		
+		}
+
 		_deleteMarker.push_back(marko);
 		i++;
 
-	} while (i<5);
+	} while (i<4);
+
+	_deleteMarker.push_back(marker);
 
 	marker->getOwner()->GainScore();
 
-	_deleteMarker.push_back(marker);
 
 	return true;
 }

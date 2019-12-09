@@ -37,8 +37,8 @@ private:
 	std::map<int, bool> _input;
 
 public:
-	void KeyUp(int code) { _input[code] = true; }
-	void KeyDown(int code){ _input[code] = false; }
+	void KeyUp(int code) { _input[code] = false; }
+	void KeyDown(int code){ _input[code] = true; }
 
 	bool IsInputKey(int code) { return _input[code]; }
 };

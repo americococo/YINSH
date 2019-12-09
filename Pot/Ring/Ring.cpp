@@ -5,14 +5,24 @@
 
 
 #include "../../Draw/Sprite/Sprite.h"
+
+#include "../../Player/Player.h"
+
 Ring::Ring(bool color, Player * player, sPosition postition)
 {
 	_color = color;
 	_sPostion = postition;
 	_owner = player;
-	_pic = new Sprite("Ring.png");
 
-	
+
+	if (_owner->GetPlayerType() == ePlayerType::eUser)
+	{
+		_pic = new Sprite("Ring.png");
+	}
+	else
+	{
+		_pic = new Sprite("RingC.png");
+	}
 
 
 	MapManager::GetInstance().SettingPot(this,ePotType::eRING, _sPostion);
@@ -38,14 +48,19 @@ void Ring::move(eDirection direction, int walkPoint)
 	sPosition original;
 	original = _sPostion;
 
-    while (samePostion(From,_sPostion))
+    while (false == samePostion(From,_sPostion))
     {
 		_sPostion._x += vector[direction]._x;
 		_sPostion._y += vector[direction]._y;
 		Marker * marker = ((Marker*)MapManager::GetInstance().getTit(_sPostion)->returnPot(ePotType::eMarker));
-		marker->reverse();
+		if (marker != nullptr)
+			marker->reverse();
     }
     
+
+	_realPositionX = MapManager::GetInstance().getTit(_sPostion)->GetrealPositionX();
+	_realPositionY = MapManager::GetInstance().getTit(_sPostion)->GetrealPositionY();
+	_pic->setPosition(_realPositionX, _realPositionY);
 	MapManager::GetInstance().MoveRing(original,_sPostion);
 
 }
