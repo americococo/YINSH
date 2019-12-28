@@ -128,7 +128,7 @@ void MapManager::ResetMarker(Pot * pot)
 	_mapData[ssss._y][ssss._x]->ResetMarker();
 }
 
-sPosition MapManager::GetTITGamePosition(int RealPositionX, int RealPositionY)
+bool MapManager::GetTITGamePosition(int RealPositionX, int RealPositionY,sPosition * result)
 {
 	sPosition a_cocococo;
 
@@ -152,10 +152,12 @@ sPosition MapManager::GetTITGamePosition(int RealPositionX, int RealPositionY)
 				minY < RealPositionY && maxY > RealPositionY)
 			{
 				a_cocococo = (*mapPleace).second->GetGamePosition();
-				return a_cocococo;
+				*result = a_cocococo;
+				return true;
 			}
 			
 		}
 	}
 
+	return false;
 }

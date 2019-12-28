@@ -35,5 +35,5 @@ public:
 
 	void ResetMarker(Pot * pot);
 
-	sPosition GetTITGamePosition(int RealPositionX, int RealPositionY);
+	bool GetTITGamePosition(int RealPositionX, int RealPositionY, sPosition * result);
 };

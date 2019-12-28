@@ -27,11 +27,11 @@ bool Com::settingRing()
 		int y = InputSystem::GetInstance().GetMousePositionY();
 
 		//실좌표 xy를 토대로 Map좌표 도출
-
 		sPosition asdkjaksdj;
-		asdkjaksdj = MapManager::GetInstance().GetTITGamePosition(x, y);
+		bool possible_position;
+		possible_position = MapManager::GetInstance().GetTITGamePosition(x, y, &asdkjaksdj);
 
-		if (MapManager::GetInstance().getTit(asdkjaksdj)->returnPot(ePotType::eRING)==nullptr)
+		if (possible_position == true && MapManager::GetInstance().getTit(asdkjaksdj)->returnPot(ePotType::eRING) == nullptr)
 		{
 			Ring * ring = new Ring(false, this, asdkjaksdj);
 			_rings.push_back(ring);
@@ -52,9 +52,10 @@ bool Com::SettingMarker()
 		//실좌표 xy를 토대로 Map좌표 도출
 
 		sPosition asdkjaksdj;
-		asdkjaksdj = MapManager::GetInstance().GetTITGamePosition(x, y);
+		bool possible_position;
+		possible_position = MapManager::GetInstance().GetTITGamePosition(x, y, &asdkjaksdj);
 
-		if (nullptr == MapManager::GetInstance().getTit(asdkjaksdj)->returnPot(ePotType::eRING))
+		if (possible_position == true &&  nullptr == MapManager::GetInstance().getTit(asdkjaksdj)->returnPot(ePotType::eRING))
 			return false;
 
 		if (MapManager::GetInstance().getTit(asdkjaksdj)->returnPot(ePotType::eRING)->getOwner() == this
